@@ -1,5 +1,5 @@
 {
-  "name": "hooks-fixed",
+  "name": "hooks-fixed-promised",
   "description": "Adds pre and post hook functionality to your JavaScript methods.",
   "version": "1.0.0",
   "keywords": [
@@ -9,10 +9,10 @@
     "pre",
     "post"
   ],
-  "homepage": "https://github.com/vkarpov15/hooks-fixed/",
+  "homepage": "https://github.com/bojand/hooks-fixed-promised",
   "repository": {
     "type": "git",
-    "url": "git://github.com/vkarpov15/hooks-fixed.git"
+    "url": "git://github.com/bojand/hooks-fixed-promised.git"
   },
   "author": "Brian Noguchi <brian.noguchi@gmail.com> (https://github.com/bnoguchi/)",
   "main": "./hooks.js",
