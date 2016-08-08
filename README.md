@@ -3,6 +3,8 @@ hooks
 
 Add pre and post middleware hooks to your JavaScript methods.
 
+**Fork of [hooks-fixed](https://github.com/vkarpov15/hooks-fixed) that adds promise support for post middleware.**
+
 ## Installation
     npm install hooks
 

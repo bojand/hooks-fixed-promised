@@ -69,7 +69,7 @@ module.exports = {
               , ret, total_, current_, next_, done_, postArgs;
 
             if (_current === _total) {
-              
+
               next_ = function () {
                 if (arguments[0] instanceof Error) {
                   return handleError(arguments[0]);
@@ -100,14 +100,21 @@ module.exports = {
               current_ = -1;
               ret = fn.apply(self, args_); // Execute wrapped function, post handlers come afterward
 
-              if (total_ && typeof lastArg !== 'function') return next_();  // no callback provided, execute next_() manually
+              // check if it's a promise
+              if (ret && typeof ret.then === 'function') {
+                ret.then(function(result) {
+                  if (total_ && typeof lastArg !== 'function') return next_(null, result);
+                  return result;
+                }).catch(function() {});
+              } else if (total_ && typeof lastArg !== 'function') return next_();  // no callback provided, execute next_() manually
+
               return ret;
             }
           };
 
       return _next.apply(this, arguments);
     };
-    
+
     proto[name].numAsyncPres = 0;
 
     return this;
@@ -138,7 +145,7 @@ module.exports = {
     }
     var proto = this.prototype || this
       , posts = proto._posts = proto._posts || {};
-    
+
     this._lazySetupHooks(proto, name);
     (posts[name] = posts[name] || []).push(fn);
     return this;
@@ -171,7 +178,7 @@ module.exports = {
     }
     return this;
   },
-  
+
   _lazySetupHooks: function (proto, methodName, errorCb) {
     if ('undefined' === typeof proto[methodName].numAsyncPres) {
       this.hook(methodName, proto[methodName], errorCb);
